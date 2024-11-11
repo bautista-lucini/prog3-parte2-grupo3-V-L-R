@@ -6,7 +6,6 @@ import {
     StyleSheet,
     TouchableOpacity,
     FlatList,
-    Image
 } from 'react-native';
 
 class Register extends Component {
