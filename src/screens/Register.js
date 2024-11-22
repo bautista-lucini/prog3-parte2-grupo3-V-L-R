@@ -7,13 +7,14 @@ import {
     TouchableOpacity,
     FlatList,
 } from 'react-native';
-import { auth } from  "../firebase/config";
+import { auth, db } from  "../firebase/config";
 
 
 class Register extends Component {
     constructor(props) {
       super(props);
       this.state = {
+        username: "",
         email: "",
         password: "",
         registered: false,
@@ -21,10 +22,18 @@ class Register extends Component {
       };
     }
   
-    handleSubmit(email, pass) {
+    handleSubmit(username, email, pass) {
+      console.log(username, email, pass);
       auth
         .createUserWithEmailAndPassword(email, pass)
-        .then((response) => this.setState({ registered: true, errMsg: "" }))
+        .then((response) => {
+            // db.collection("users").add({
+            // username : username,
+            // email : email,
+            // password : pass
+          // })
+          this.setState({ registered: true, errMsg: "" })
+        })
         .catch((error) => {
           console.log(error.message);
           this.setState({ errMsg: error.message });
@@ -36,6 +45,14 @@ class Register extends Component {
         <View style={styles.container}>
           <Text style={styles.heading}>Registro</Text>
   
+          <TextInput
+            style={styles.input}
+            onChangeText={(text) => this.setState({ username: text })}
+            keyboardType="default"
+            placeholder="Ingrese su nombre de usario"
+            value={this.state.username}
+          />
+          
           <TextInput
             style={styles.input}
             onChangeText={(text) => this.setState({ email: text })}
@@ -55,7 +72,7 @@ class Register extends Component {
   
           <TouchableOpacity
             onPress={() =>
-              this.handleSubmit(this.state.email, this.state.password)
+              this.handleSubmit( this.state.username, this.state.email, this.state.password)
             }
             style={styles.button}
           >
