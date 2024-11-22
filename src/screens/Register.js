@@ -7,7 +7,7 @@ import {
     TouchableOpacity,
     FlatList,
 } from 'react-native';
-// import {auth} from  "../firebase/config";
+import { auth } from  "../firebase/config";
 
 
 class Register extends Component {

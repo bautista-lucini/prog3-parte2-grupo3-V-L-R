@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/native-stack';
 
-// import { auth } from '../firebase/config';
+import { auth } from '../firebase/config';
 
-import Login from '../screens/Login';
-import Register from '../screens/Register';
+import Home from "../screens/Home";
 
+const Tabs = createBottomTabNavigator();
 
-const Stack = createNativeStackNavigator();
-
-class MainNavigation extends Component {
+class HomeMenu extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -20,14 +18,18 @@ class MainNavigation extends Component {
     }
 
     componentDidMount() {
-      //hacer
+        auth.onAuthStateChanged(usr => {
+            if (!usr) {
+                this.props.navigation.navigate("Login")
+            }
+          })
     }
 
     render() {
         return (
             <NavigationContainer>
                 <Stack.Navigator>
-                    
+                    <Tabs.Screen name="Home" component={Home} />
                 </Stack.Navigator>
             </NavigationContainer>
         )
@@ -35,4 +37,4 @@ class MainNavigation extends Component {
 
 }
 
-export default MainNavigation;
+export default HomeMenu;
