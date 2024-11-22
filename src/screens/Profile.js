@@ -13,17 +13,34 @@ class Profile extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            username: "",
+            email: auth.currentUser.email,
+            posts: null,
+            cargando: true
         }
     }
 
+    borrarPost(id) { // aca hacer la funcion de borrar post. 
+
+    }
+
+
+    logout() { // creo que es signOut()
+
+    }
+
+
+    componentDidMount(){
+        // hacer
+    }
+
     render() {
-    //     return (
+        return (
+            <View>
 
-    //     );
-    // }
-
-}
+            </View>
+        )
+    };
 }
 
 
