@@ -94,6 +94,10 @@ class Register extends Component {
   const styles = StyleSheet.create({
     container: {
       margin: 20,
+      flex: 1,
+      backgroundColor: '#fff',
+      alignItems: 'center',
+      justifyContent: 'center',
     },
     heading: {
       fontSize: 30,

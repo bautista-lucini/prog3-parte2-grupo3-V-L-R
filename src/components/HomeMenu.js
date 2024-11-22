@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { auth } from '../firebase/config';
 
@@ -29,13 +28,11 @@ class HomeMenu extends Component {
 
     render() {
         return (
-            <NavigationContainer>
                 <Tab.Navigator>
                     <Tab.Screen name="Home" component={Home} />
                     <Tab.Screen name="NewPost" component={NewPost} />
                     <Tab.Screen name="Profile" component={Profile} />
                 </Tab.Navigator>
-            </NavigationContainer>
         )
     }
 
