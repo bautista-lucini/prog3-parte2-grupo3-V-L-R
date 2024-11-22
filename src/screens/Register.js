@@ -27,11 +27,11 @@ class Register extends Component {
       auth
         .createUserWithEmailAndPassword(email, pass)
         .then((response) => {
-            // db.collection("users").add({
-            // username : username,
-            // email : email,
-            // password : pass
-          // })
+            db.collection("users").add({
+            username : username,
+            email : email,
+            password : pass
+          })
           this.setState({ registered: true, errMsg: "" })
         })
         .catch((error) => {

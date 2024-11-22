@@ -7,7 +7,7 @@ import { auth } from '../firebase/config';
 
 import Home from "../screens/Home";
 
-const Tabs = createBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
 class HomeMenu extends Component {
     constructor(props) {
@@ -28,9 +28,9 @@ class HomeMenu extends Component {
     render() {
         return (
             <NavigationContainer>
-                <Stack.Navigator>
-                    <Tabs.Screen name="Home" component={Home} />
-                </Stack.Navigator>
+                <Tab.Navigator>
+                    <Tab.Screen name="Home" component={Home} />
+                </Tab.Navigator>
             </NavigationContainer>
         )
     }
