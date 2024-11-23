@@ -1,6 +1,7 @@
 import React from "react";
  import { View, Text, Image } from 'react-native';
 
+  //tengo que seguir firma bauti
  function Card() {
     return <Image style={styles.image}
                   source={{uri:'https://reactnative.dev/img/photo.png'}}
@@ -12,4 +13,3 @@ import React from "react";
       height: 400,
     },
   }) 
-  //tengo que seguir

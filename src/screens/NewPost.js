@@ -13,7 +13,7 @@ class NewPost extends Component {
           likes: [],
       }   
     }
-
+    
     handleSubmit() {
         console.log(this.state)
         db.collection("posts").add(this.state)
@@ -25,7 +25,6 @@ class NewPost extends Component {
           console.log(err)
          })
       }
-
     render() {
         return(
         <View style={styles.container}>
@@ -77,6 +76,5 @@ const styles = StyleSheet.create({
   },
 
 });
-
 
 export default NewPost;
