@@ -4,8 +4,7 @@ import { auth, db } from "../firebase/config";
 
 // class NewPost extends Component {
 //     constructor(props) {
-//         super(props)
-       
+//         super(props)   
 //     }
 
 //     handleSubmit() {
@@ -53,7 +52,5 @@ export default function NewPost() {
     );
   }
 
-
 // export default NewPost;
-
 // const Style = StyleSheet.create({});

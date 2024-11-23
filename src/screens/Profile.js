@@ -33,11 +33,9 @@ class Profile extends Component {
             });
     }
 
-
     logout() { 
         auth.signOut();
     }
-
 
     componentDidMount(){
         db.collection("posts").where("owner", "==", this.state.email).get()
@@ -102,7 +100,5 @@ class Profile extends Component {
         )
     };
 }
-
-
 
 export default Profile;
