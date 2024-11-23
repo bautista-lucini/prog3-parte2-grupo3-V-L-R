@@ -6,6 +6,7 @@ import {
     StyleSheet,
     TouchableOpacity,
     FlatList,
+    Image,
 } from 'react-native';
 import { auth, db } from  "../firebase/config";
 
@@ -22,16 +23,19 @@ class Register extends Component {
     }
   
     handleSubmit(username, email, pass) {
-      console.log(username, email, pass);
-      auth
-        .createUserWithEmailAndPassword(email, pass)
+      auth.createUserWithEmailAndPassword(email, pass)
         .then((response) => {
-            db.collection("users").add({
-            username : username,
-            email : email,
-            password : pass
+            if (response) {
+              db.collection("users").add({
+                username : username,
+                email : email,
+                password : pass
           })
-          this.setState({ registered: true, errMsg: "" })
+          .then(() => {
+            this.setState({ registered: true, errorMsg: '' });
+            this.props.navigation.navigate('Login');
+          })
+          }
         })
         .catch((error) => {
           console.log(error.message);
@@ -42,6 +46,7 @@ class Register extends Component {
     render() {
       return (
         <View style={styles.container}>
+          {/* <Image />  aca el logo de la app */}
           <Text style={styles.heading}>Registro</Text>
   
           <TextInput
@@ -64,7 +69,7 @@ class Register extends Component {
             style={styles.input}
             onChangeText={(text) => this.setState({ password: text })}
             keyboardType="default"
-            placeholder="Ingrese su password"
+            placeholder="Ingrese su contraseña"
             secureTextEntry={true}
             value={this.state.password}
           />
@@ -77,8 +82,11 @@ class Register extends Component {
           >
             <Text style={styles.buttonText}> Registrarse</Text>
           </TouchableOpacity>
+          
           {this.state.errMsg && <Text style={styles.errorText}> {this.state.errMsg}</Text>}
-          <Text>Navegación cruzada a Login: </Text>
+          
+          <Text>¿Tienes una cuenta? Entrar</Text>
+          
           <TouchableOpacity
             onPress={() => this.props.navigation.navigate("Login")}
             style={styles.button}

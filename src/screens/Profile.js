@@ -23,13 +23,12 @@ class Profile extends Component {
     borrarPost(id) { 
         db.collection("posts").doc(id).delete()
             .then(() => {
-                console.log("Document successfully deleted!");
                 this.setState({
                     posts: this.state.posts.filter(post => post.id !== id)
                 });
             })
             .catch((error) => {
-                console.error("Error removing document: ", error);
+                console.log(error)
             });
     }
 
@@ -69,21 +68,24 @@ class Profile extends Component {
 
     render() {
         return (
-            <View>
+            <View style={styles.container}>
                 {
                     this.state.cargando ?
-                        <Text>Cargando...</Text> :
+                        <Text style={styles.text}>Cargando...</Text> :
                         this.state.posts.length === 0 ?
-                            <Text>No hay posteos</Text> :
+                            <Text style={styles.text}>No hay posteos</Text> :
                             <FlatList
                                 data={this.state.posts}
                                 renderItem={({ item }) => {
                                     return (
-                                        <View>
-                                            <Text>{item.titulo}</Text>
-                                            <Text>{item.descripcion}</Text>
-                                            <TouchableOpacity onPress={() => this.borrarPost(item.id)}>
-                                                <Text>Borrar post</Text>
+                                        <View style={styles.postContainer}>
+                                            <Text style={styles.postTitle}> {item.titulo} </Text>
+                                            <Text style={styles.postDescription}> {item.descripcion}</Text>
+                                            <TouchableOpacity 
+                                                onPress={() => this.borrarPost(item.id)}
+                                                style={styles.Button}
+                                            >
+                                                <Text style={styles.ButtonText}> Borrar post</Text>
                                             </TouchableOpacity>
                                         </View>
                                     )
@@ -91,14 +93,72 @@ class Profile extends Component {
                                 keyExtractor={(item) => item.id}
                             />
                 }
-                <Text>{this.state.username}</Text>
-                <Text>{this.state.email}</Text>
-                <TouchableOpacity onPress={() => this.logout()}>
-                    <Text>Logout</Text>
+                <Text style={styles.username}> {this.state.username}</Text>
+                <Text style={styles.email}> {this.state.email}</Text>
+                <TouchableOpacity 
+                    onPress={() => this.logout()}
+                    style={styles.Button}
+                >
+                    <Text style={styles.ButtonText}>Logout</Text>
                 </TouchableOpacity>
             </View>
         )
     };
 }
+
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: "#FAFAFA",
+        padding: 10,
+    },
+    ButtonText: {
+        color: "#FFFFFF",
+        fontWeight: "bold",
+        fontSize: 14,
+    },
+    Button: {
+        backgroundColor: "#FF3B30",
+        padding: 10,
+        borderRadius: 5,
+        alignItems: "center",
+    },
+    postContainer: {
+        backgroundColor: "#FFFFFF",
+        padding: 15,
+        borderRadius: 8,
+        marginBottom: 10,
+        borderWidth: 1,
+        borderColor: "#DBDBDB",
+    },
+    postTitle: {
+        fontSize: 18,
+        fontWeight: "bold",
+        color: "#262626",
+        marginBottom: 5,
+    },
+    postDescription: {
+        fontSize: 14,
+        color: "#4F4F4F",
+        marginBottom: 10,
+    },
+    text: {
+        textAlign: "center",
+        color: "#8E8E8E",
+        fontSize: 16,
+        marginTop: 20,
+    },
+    email: {
+        fontSize: 16,
+        color: "#8E8E8E",
+        marginVertical: 10,
+    },
+    username: {
+        fontSize: 20,
+        fontWeight: "bold",
+        color: "#262626",
+    },
+})
 
 export default Profile;
