@@ -75,15 +75,15 @@ class Register extends Component {
             }
             style={styles.button}
           >
-            <Text>Registrarse</Text>
+            <Text style={styles.buttonText}> Registrarse</Text>
           </TouchableOpacity>
-          {this.state.errMsg && <Text>{this.state.errMsg}</Text>}
+          {this.state.errMsg && <Text style={styles.errorText}> {this.state.errMsg}</Text>}
           <Text>Navegación cruzada a Login: </Text>
           <TouchableOpacity
             onPress={() => this.props.navigation.navigate("Login")}
             style={styles.button}
           >
-            <Text>Ya tengo cuenta</Text>
+            <Text style={styles.navText}>Ya tengo cuenta</Text>
           </TouchableOpacity>
         </View>
       );
@@ -92,30 +92,52 @@ class Register extends Component {
   
   const styles = StyleSheet.create({
     container: {
-      margin: 20,
       flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
+      backgroundColor: "#FAFAFA", 
+      alignItems: "center",
+      justifyContent: "center",
+      padding: 20,
     },
     heading: {
-      fontSize: 30,
-      fontWeight: 700,
-      marginBottom: 10,
+      fontSize: 36, 
+      fontWeight: "bold", 
+      color: "#262626", 
+      marginBottom: 20,
     },
     button: {
-      backgroundColor: "#51b9e9",
-      borderRadius: 5,
-      padding: 10,
-      width: "100%",
+      backgroundColor: "#0095F6",
+      borderRadius: 8,
+      padding: 16,
       alignItems: "center",
+      justifyContent: "center",
+      width: 250, 
       marginTop: 10,
     },
     input: {
-      padding: 10,
+      width: 300, 
+      backgroundColor: "#FFFFFF", 
+      borderRadius: 8, 
+      padding: 12, 
       borderWidth: 1,
-      borderColor: "#00000087",
-  
+      borderColor: "#DBDBDB", 
+      marginBottom: 15,
+      fontSize: 16,
+      color: "#262626", 
+    },
+    buttonText: {
+      color: "#FFFFFF", 
+      fontSize: 16,
+      fontWeight: "bold",
+    },
+    navText: {
+      color: "#FFFFFF", 
+      fontSize: 16,
+      fontWeight: "bold",
+    },
+    errorText: {
+      color: "#FF3B30", 
+      fontSize: 14,
+      marginTop: 10,
     },
   });
   
