@@ -45,6 +45,14 @@ import { auth, db } from "../firebase/config";
 //         )
 //     }
 
+export default function NewPost() {
+    return (
+      <View>
+        <Text>New Post Screen</Text>
+      </View>
+    );
+  }
+
 
 // export default NewPost;
 
