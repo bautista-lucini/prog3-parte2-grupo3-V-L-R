@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { View, Text, FlatList, StyleSheet } from "react-native";
 import { db, auth } from "../firebase/config"; 
 
-
 class Home extends Component {
     constructor(props) {
       super(props);
@@ -24,16 +23,13 @@ class Home extends Component {
           })
           .catch((err) => console.log(err));
       }
-
     render() {
-
         return (
             <View style={styles.container}>
                 {this.state.posts.length === 0 ? (
-                <Text>No hay posteos disponibles</Text>
-
+                <Text>No hay posteos </Text>
                 ) : (
-
+                    
                 <FlatList
                     data={this.state.posts}
                     keyExtractor={(item) => item.id.toString()} 
@@ -43,10 +39,8 @@ class Home extends Component {
                         <Text style={styles.title}>{item.data.titulo}</Text>
                         <Text style={styles.description}>{item.data.descripcion}</Text>
                     </View>
-
                     )}
                 />
-                
                 )}
             </View>
         )
@@ -61,6 +55,5 @@ const styles = StyleSheet.create({
     title: { fontSize: 14, color: "#333" },
     description: { fontSize: 12, color: "#666" },
   });
-
 
 export default Home;

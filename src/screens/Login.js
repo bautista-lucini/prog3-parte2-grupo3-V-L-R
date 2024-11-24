@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { TextInput } from "react-native-web";
+import Card from "../components/Image";
 
 import { auth } from "../firebase/config";
 
@@ -28,6 +29,8 @@ class Login extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.heading}>Ingresar</Text>
+
+        <Card source={require("../../assets/logo1.png")} />
 
         <Text> Email </Text>
         <TextInput

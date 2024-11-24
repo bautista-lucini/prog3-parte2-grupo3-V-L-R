@@ -9,6 +9,7 @@ import {
     Image,
 } from 'react-native';
 import { auth, db } from  "../firebase/config";
+import Card from "../components/Image";
 
 class Register extends Component {
     constructor(props) {
@@ -46,8 +47,9 @@ class Register extends Component {
     render() {
       return (
         <View style={styles.container}>
-          {/* <Image />  aca el logo de la app */}
+
           <Text style={styles.heading}>Registro</Text>
+          <Card source={require("../../assets/logo1.png")} />
   
           <TextInput
             style={styles.input}
