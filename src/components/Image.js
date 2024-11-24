@@ -1,8 +1,7 @@
 import React from "react";
  import { View, Text, Image, StyleSheet} from 'react-native';
- 
 
- export default function Card({ source }) { 
+function Card({ source }) { 
     return (
       <Image style={styles.image}
         source={source} 
@@ -14,3 +13,5 @@ import React from "react";
   const styles = StyleSheet.create({
     image: { height: 200, width: 200 }, 
   });
+
+  export default Card;
