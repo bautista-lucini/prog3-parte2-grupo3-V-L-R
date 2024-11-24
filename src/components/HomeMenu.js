@@ -63,7 +63,15 @@ class HomeMenu extends Component {
                         name="Profile"
                         component={Profile} />
                     
-                    {/* <Tab.Screen name="Users" component={Users} /> */}
+                    <Tab.Screen options={{
+                        headerShown: false,
+                        tabBarShowLabel: false,
+                        tabBarIcon: () => (
+                            <AntDesign name="search1" size={24} color="black" />
+                        ),
+                    }}
+                        name="Users"
+                        component={Users} />
                 </Tab.Navigator>
         )
     }

@@ -11,6 +11,7 @@ class NewPost extends Component {
           owner: auth.currentUser.email,
           createdAt: Date.now(),
           likes: [],
+          errMsg: "",
       }   
     }
     
@@ -21,9 +22,10 @@ class NewPost extends Component {
           // console.log("El posteo se subió")
           this.props.navigation.navigate("Home")
          })
-      .catch(err => {
-          console.log(err)
-         })
+         .catch((error) => {
+          console.log(error.message);
+          this.setState({ errMsg: error.message });
+        });
       }
     render() {
         return(
