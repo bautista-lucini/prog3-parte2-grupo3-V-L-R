@@ -55,7 +55,7 @@ class Login extends Component {
           onPress={() => this.handleSubmit(this.state.email, this.state.password)}
           style={[styles.button, styles.buttonSecondary]}>
             
-            <Text>Entrar en la app.</Text>
+            <Text style={styles.navText}>Entrar en la app.</Text>
 
         </TouchableOpacity>
         
@@ -64,7 +64,7 @@ class Login extends Component {
           onPress={() => this.props.navigation.navigate("Register")}
           style={styles.button}
         >
-          <Text>No tengo cuenta</Text>
+          <Text style={styles.navText}>No tengo cuenta</Text>
         </TouchableOpacity>
   
       </View>
@@ -86,25 +86,32 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   button: {
-    backgroundColor: "#51b9e9",
-    borderRadius: 5,
-    padding: 10,
-    width: "80%",
+    backgroundColor: "#0095F6",
+    borderRadius: 8,
+    padding: 16,
     alignItems: "center",
+    justifyContent: "center",
+    width: 250, 
     marginTop: 10,
   },
   buttonSecondary: {
-    backgroundColor: "#ffa500",
-    borderRadius: 5,
-    padding: 10,
-    width: "80%",
-    alignItems: "center",
-    marginTop: 10,
+    backgroundColor: "#0095F6",
+      borderRadius: 8,
+      padding: 16,
+      alignItems: "center",
+      justifyContent: "center",
+      width: 250, 
+      marginTop: 10,
   },
   input:{
     padding: 10, 
     borderWidth: 1,
     borderColor: "#00000087"
+  },
+  navText: {
+    color: "#FFFFFF", 
+    fontSize: 16,
+    fontWeight: "bold",
   }
 });
 
