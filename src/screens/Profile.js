@@ -6,6 +6,7 @@ import {
     StyleSheet,
     TouchableOpacity,
     FlatList,
+    Image,
 } from 'react-native';
 import { auth, db } from  "../firebase/config";
 
@@ -93,8 +94,17 @@ class Profile extends Component {
                                 keyExtractor={(item) => item.id}
                             />
                 }
-                <Text style={styles.username}> {this.state.username}</Text>
-                <Text style={styles.email}> {this.state.email}</Text>
+                    <View style={styles.profileContainer}>
+                    <Image 
+                        source={require("../../assets/profile-generico.png")} 
+                        style={styles.profileImage} 
+                    />
+                    <View>
+                        <Text style={styles.username}> {this.state.username}</Text>
+                        <Text style={styles.email}> {this.state.email}</Text>
+                    </View>
+                </View>
+    
                 <TouchableOpacity 
                     onPress={() => this.logout()}
                     style={styles.Button}
@@ -112,6 +122,27 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#FAFAFA",
         padding: 10,
+    },
+    profileContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        marginVertical: 20, 
+    },
+    profileImage: {
+        width: 50,
+        height: 50,
+        borderRadius: 25,
+        marginRight: 10,
+    },
+    username: {
+        fontSize: 20,
+        fontWeight: "bold",
+        color: "#262626",
+    },
+    email: {
+        fontSize: 16,
+        color: "#8E8E8E",
+        marginTop: 5,
     },
     ButtonText: {
         color: "#FFFFFF",
@@ -149,16 +180,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginTop: 20,
     },
-    email: {
-        fontSize: 16,
-        color: "#8E8E8E",
-        marginVertical: 10,
-    },
-    username: {
-        fontSize: 20,
-        fontWeight: "bold",
-        color: "#262626",
-    },
-})
+});
+
 
 export default Profile;
