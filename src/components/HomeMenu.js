@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { StyleSheet, View, Text, Image } from 'react-native'; 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { auth } from '../firebase/config';
@@ -30,53 +30,127 @@ class HomeMenu extends Component {
           })
     }
 
+    mostrarHeader = (title) => (
+        <View style={styles.header}>
+            <Image 
+                source={require("../../assets/logo2.png")} 
+                style={styles.logo} 
+            />
+            <Text style={styles.headerText}>{title}</Text>
+        </View>
+    );
+
+    HomeMensaje = () => (
+        <View style={styles.container}>
+            {this.mostrarHeader("Las publicaciones más recientes")}
+            <Home />
+        </View>
+    );
+
+    NewPostMensaje = () => (
+        <View style={styles.container}>
+            {this.mostrarHeader("Crea tus posteos, para que tus amigos te den like")}
+            <NewPost />
+        </View>
+    );
+
+    ProfileMensaje = () => (
+        <View style={styles.container}>
+            {this.mostrarHeader("Tu perfil")}
+            <Profile />
+        </View>
+    );
+
+    SearchMensaje = () => (
+        <View style={styles.container}>
+            {this.mostrarHeader("Busca a tus amigos")}
+            <Users />
+        </View>
+    );
+
+
     render() {
         return (
-                <Tab.Navigator>
-                    <Tab.Screen options={{
+            <Tab.Navigator>
+                <Tab.Screen 
+                    options={{
                         headerShown: false,
                         tabBarShowLabel: false,
                         tabBarIcon: () => (
                             <AntDesign name="home" size={24} color="black" />
                         ),
                     }}
-                        name="Home"
-                        component={Home} />
-                   
-                    <Tab.Screen options={{
+                    name="Home"
+                    component={this.HomeMensaje} 
+                />
+                
+                <Tab.Screen 
+                    options={{
                         headerShown: false,
                         tabBarShowLabel: false,
                         tabBarIcon: () => (
                             <MaterialCommunityIcons name="post" size={24} color="black" />
                         ),
                     }}
-                        name="NewPost"
-                        component={NewPost} />
-                    
-                    <Tab.Screen options={{
+                    name="NewPost"
+                    component={this.NewPostMensaje} 
+                />
+                
+                <Tab.Screen 
+                    options={{
                         headerShown: false,
                         tabBarShowLabel: false,
                         tabBarIcon: () => (
                             <MaterialCommunityIcons name="face-man-profile" size={24} color="black" />
                         ),
                     }}
-                        name="Profile"
-                        component={Profile} />
-                    
-                    <Tab.Screen options={{
+                    name="Profile"
+                    component={this.ProfileMensaje} 
+                />
+                
+                <Tab.Screen 
+                    options={{
                         headerShown: false,
                         tabBarShowLabel: false,
                         tabBarIcon: () => (
                             <AntDesign name="search1" size={24} color="black" />
                         ),
                     }}
-                        name="Users"
-                        component={Users} />
-                </Tab.Navigator>
-        )
+                    name="Users"
+                    component={this.SearchMensaje} 
+                />
+            </Tab.Navigator>
+        );
     }
-    
-
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+    header: {
+        height: 90,
+        backgroundColor: "white",
+        flexDirection: "row", 
+        alignItems: "center", 
+        justifyContent: "flex-start", 
+        paddingHorizontal: 15, 
+        borderBottomWidth: 1,
+        borderBottomColor: "#ddd",
+    },
+    logo: {
+        width: 110, 
+        height: 85, 
+        resizeMode: "contain", 
+    },
+    headerText: {
+        fontSize: 15, 
+        fontWeight: "500", 
+        color: "#4A4A4A", 
+        marginLeft: 20, 
+    },
+});
+
+
 
 export default HomeMenu;
