@@ -35,6 +35,7 @@ class Profile extends Component {
 
     logout() { 
         auth.signOut();
+        this.props.navigation.navigate("Login");
     }
 
     componentDidMount(){

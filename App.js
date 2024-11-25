@@ -21,38 +21,30 @@ export default class App extends Component {
     };
   }
   componentDidMount() {
-    auth.onAuthStateChanged((user) => {
+    auth.onAuthStateChanged(user => {
       if (user) {
-        console.log("USUARIO:", user.email);
-        this.setState({ loggedIn: true, loading: false });
+        this.setState({loggedIn: true, loading: false})
       } else {
-        console.log("NO HAY USUARIO");
-        this.setState({ loggedIn: false, loading: false });
+        this.setState({loading: false})
       }
-    });
+    })
   }
 
   render() {
-    const { loggedIn, loading } = this.state; 
 
-  if (loading) {
-    return (
-      <View style={styles.container}>
-        <Text>Cargando...</Text>
-      </View>
-    );
-  }
     return (
       <View style={styles.container}>
         <NavigationContainer>
         <Stack.Navigator>
-            {loggedIn ? (
+            {
+              this.state.loggedIn ? 
+              <>
               <Stack.Screen
                 options={{ headerShown: false }}
                 name="HomeMenu"
                 component={HomeMenu}
               />
-            ) : (
+              </> : 
               <>
                 <Stack.Screen
                   options={{ headerShown: false }}
@@ -65,7 +57,7 @@ export default class App extends Component {
                   component={Login}
                 />
               </>
-            )}
+            }
           </Stack.Navigator>
         </NavigationContainer>
       </View>

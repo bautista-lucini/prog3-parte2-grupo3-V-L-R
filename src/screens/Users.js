@@ -8,29 +8,23 @@ class Users extends Component {
         this.state = {
             username: "",
             errMsg: "",
-            input: ''
+            users: [],
       }   
     }
-    handleSubmit(username) {
-        auth.createUserWithEmailAndPassword(email, pass)
-          .then((response) => {
-              if (response) {
-                db.collection("users").add({
-                  username : username,
-                  email : email,
-                  password : pass
-            })
-            .then(() => {
-              this.setState({ registered: true, errorMsg: '' });
-              this.props.navigation.navigate('Login');
-            })
-            }
-          })
-          .catch((error) => {
-            console.log(error.message);
-            this.setState({ errMsg: error.message });
-          });
-      }
+    
+    handleSearch() {
+      // hacer con users. lo anterior no va mas. 
+      db.collection("users").onSnapshot(doc => {
+        let users = [];
+        doc.forEach(user => {
+          users.push(user.data())
+      })
+      users = users.filter(user => {
+        return user.username.includes(this.state.username)
+      })
+      this.setState({ users })
+    })
+  }
     
    
     render() {
@@ -41,9 +35,12 @@ class Users extends Component {
                 <TextInput
                     style={styles.input}
                     keyboardType="default"
-                    onChangeText={(titulo) => this.setState({titulo})}
+                    onChangeText={ (text) => {
+                      this.setState({username: text})
+                      this.handleSearch()
+                    }}
                     placeholder="Ingrese el nombre de usuario"
-                    value={this.state.titulo}
+                    // value={this.state.titulo}
                 />
                
                 <TouchableOpacity onPress={() => this.handleSubmit()} style={styles.button}>
@@ -59,7 +56,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
   },
   input:{
     padding: 10, 
