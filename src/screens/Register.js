@@ -87,6 +87,7 @@ class Register extends Component {
           
           {this.state.errMsg && <Text style={styles.errorText}> {this.state.errMsg}</Text>}
           
+          <Text><br/></Text>
           <Text>¿Tienes una cuenta? Entrar</Text>
           
           <TouchableOpacity

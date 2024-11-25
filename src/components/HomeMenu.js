@@ -47,6 +47,13 @@ class HomeMenu extends Component {
         </View>
     );
 
+    SearchMensaje = () => (
+        <View style={styles.container}>
+            {this.mostrarHeader("Busca a tus amigos")}
+            <Users />
+        </View>
+    );
+
     NewPostMensaje = () => (
         <View style={styles.container}>
             {this.mostrarHeader("Crea tus posteos, para que tus amigos te den like")}
@@ -61,12 +68,7 @@ class HomeMenu extends Component {
         </View>
     );
 
-    SearchMensaje = () => (
-        <View style={styles.container}>
-            {this.mostrarHeader("Busca a tus amigos")}
-            <Users />
-        </View>
-    );
+
 
 
     render() {
@@ -82,6 +84,18 @@ class HomeMenu extends Component {
                     }}
                     name="Home"
                     component={this.HomeMensaje} 
+                />
+
+                <Tab.Screen 
+                    options={{
+                        headerShown: false,
+                        tabBarShowLabel: false,
+                        tabBarIcon: () => (
+                            <AntDesign name="search1" size={24} color="black" />
+                        ),
+                    }}
+                    name="Users"
+                    component={this.SearchMensaje} 
                 />
                 
                 <Tab.Screen 
@@ -106,19 +120,8 @@ class HomeMenu extends Component {
                     }}
                     name="Profile"
                     component={this.ProfileMensaje} 
-                />
-                
-                <Tab.Screen 
-                    options={{
-                        headerShown: false,
-                        tabBarShowLabel: false,
-                        tabBarIcon: () => (
-                            <AntDesign name="search1" size={24} color="black" />
-                        ),
-                    }}
-                    name="Users"
-                    component={this.SearchMensaje} 
-                />
+                />            
+    
             </Tab.Navigator>
         );
     }
