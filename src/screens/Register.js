@@ -103,7 +103,7 @@ class Register extends Component {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: "#FAFAFA", 
+      backgroundColor: "white", 
       alignItems: "center",
       justifyContent: "center",
       padding: 20,

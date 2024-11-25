@@ -32,7 +32,6 @@ class Login extends Component {
 
         <Card source={require("../../assets/logo1.png")} />
 
-        <Text> Email </Text>
         <TextInput
           style={styles.input}
           onChangeText={(text) => this.setState({ email: text })}
@@ -41,7 +40,6 @@ class Login extends Component {
           value={this.state.email}
         />
 
-        <Text>Contraseña</Text>
         <TextInput
           style={styles.input}
           onChangeText={(text) => this.setState({ password: text })}
@@ -75,10 +73,9 @@ class Login extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
-    margin: 20,
   },
   heading: {
     fontSize: 30,
@@ -104,9 +101,15 @@ const styles = StyleSheet.create({
       marginTop: 10,
   },
   input:{
-    padding: 10, 
-    borderWidth: 1,
-    borderColor: "#00000087"
+    width: 300, 
+      backgroundColor: "#FFFFFF", 
+      borderRadius: 8, 
+      padding: 12, 
+      borderWidth: 1,
+      borderColor: "#DBDBDB", 
+      marginBottom: 15,
+      fontSize: 16,
+      color: "#262626", 
   },
   navText: {
     color: "#FFFFFF", 

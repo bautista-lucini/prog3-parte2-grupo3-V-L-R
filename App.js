@@ -17,7 +17,7 @@ export default class App extends Component {
     super();
     this.state = {
       loggedIn: false, 
-      loading: true,   
+      loading: true,
     };
   }
   componentDidMount() {
@@ -68,6 +68,6 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "white",
   },
 });
