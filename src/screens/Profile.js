@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import {
     View,
     Text,
-    TextInput,
-    StyleSheet,
-    TouchableOpacity,
     FlatList,
+    StyleSheet,
     Image,
+    ActivityIndicator,
+    TouchableOpacity,
 } from 'react-native';
 import { auth, db } from "../firebase/config";
 
@@ -16,9 +16,41 @@ class Profile extends Component {
         this.state = {
             username: "",
             email: auth.currentUser.email,
-            posts: null,
-            cargando: true
-        }
+            posts: [],
+            cargando: true,
+        };
+    }
+
+    componentDidMount() {
+        db.collection("posts")
+            .where("owner", "==", this.state.email)
+            .onSnapshot((querySnapshot) => {
+                let posts = [];
+                querySnapshot.forEach((doc) => {
+                    let data = doc.data();
+                    if (!data.likes) {
+                        data.likes = []; 
+                    }
+                    posts.push({
+                        id: doc.id,
+                        data,
+                    });
+                });
+                this.setState({
+                    posts,
+                    cargando: false,
+                });
+            });
+
+        db.collection("users").where("email", "==", this.state.email).get()
+            .then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    this.setState({
+                        username: doc.data().username
+                    });
+                });
+            })
+            .catch((error) => console.log(error));
     }
 
     borrarPost(id) {
@@ -38,63 +70,9 @@ class Profile extends Component {
         this.props.navigation.navigate("Login");
     }
 
-    componentDidMount() {
-        db.collection("posts").where("owner", "==", this.state.email).get()
-            .then((querySnapshot) => {
-                let posts = [];
-                querySnapshot.forEach((doc) => {
-                    posts.push({
-                        id: doc.id,
-                        ...doc.data()
-                    });
-                });
-                this.setState({
-                    posts,
-                    cargando: false
-                });
-            })
-            .catch((error) => {
-                console.log("Error getting documents: ", error);
-            });
-
-        db.collection("users").where("email", "==", this.state.email).get()
-            .then((querySnapshot) => {
-                querySnapshot.forEach((doc) => {
-                    this.setState({
-                        username: doc.data().username
-                    });
-                });
-            })
-            .catch((error) => console.log(error));
-    }
-
     render() {
         return (
             <View style={styles.container}>
-                {
-                    this.state.cargando ?
-                        <Text style={styles.text}>Cargando...</Text> :
-                        this.state.posts.length === 0 ?
-                            <Text style={styles.text}>No hay posteos</Text> :
-                            <FlatList
-                                data={this.state.posts}
-                                renderItem={({ item }) => {
-                                    return (
-                                        <View style={styles.postContainer}>
-                                            <Text style={styles.postTitle}> {item.titulo} </Text>
-                                            <Text style={styles.postDescription}> {item.descripcion}</Text>
-                                            <TouchableOpacity
-                                                onPress={() => this.borrarPost(item.id)}
-                                                style={styles.Button}
-                                            >
-                                                <Text style={styles.ButtonText}> Borrar post</Text>
-                                            </TouchableOpacity>
-                                        </View>
-                                    )
-                                }}
-                                keyExtractor={(item) => item.id}
-                            />
-                }
                 <View style={styles.profileContainer}>
                     <Image
                         source={require("../../assets/profile-generico.png")}
@@ -112,11 +90,34 @@ class Profile extends Component {
                 >
                     <Text style={styles.ButtonText}>Logout</Text>
                 </TouchableOpacity>
-            </View>
-        )
-    };
-}
 
+                {this.state.cargando ? (
+                    <ActivityIndicator size="large" color="blue" />
+                ) : this.state.posts.length === 0 ? (
+                    <Text style={styles.text}>No hay posteos</Text>
+                ) : (
+                    <FlatList
+                        data={this.state.posts}
+                        renderItem={({ item }) => (
+                            <View style={styles.postContainer}>
+                                <Text style={styles.postTitle}>{item.data.titulo}</Text>
+                                <Text style={styles.postDescription}>{item.data.descripcion}</Text>
+                                <Text style={styles.likeText}>{item.data.likes.length} Me gusta</Text>
+                                <TouchableOpacity
+                                    onPress={() => this.borrarPost(item.id)}
+                                    style={styles.Button}
+                                >
+                                    <Text style={styles.ButtonText}> Borrar post</Text>
+                                </TouchableOpacity>
+                            </View>
+                        )}
+                        keyExtractor={(item) => item.id}
+                    />
+                )}
+            </View>
+        );
+    }
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -155,12 +156,14 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 5,
         alignItems: "center",
+        marginTop: 10,
     },
     ButtonLogout: {
         backgroundColor: "red",
         padding: 10,
         borderRadius: 5,
         alignItems: "center",
+        marginVertical: 20,
     },
     postContainer: {
         backgroundColor: "#FFFFFF",
@@ -181,6 +184,11 @@ const styles = StyleSheet.create({
         color: "#4F4F4F",
         marginBottom: 10,
     },
+    likeText: {
+        fontSize: 14,
+        color: "#666",
+        marginTop: 5,
+    },
     text: {
         textAlign: "center",
         color: "#8E8E8E",
@@ -188,6 +196,5 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
 });
-
 
 export default Profile;
