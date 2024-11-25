@@ -16,16 +16,16 @@ export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      loggedIn: false, 
+      loggedIn: false,
       loading: true,
     };
   }
   componentDidMount() {
     auth.onAuthStateChanged(user => {
       if (user) {
-        this.setState({loggedIn: true, loading: false})
+        this.setState({ loggedIn: true, loading: false })
       } else {
-        this.setState({loading: false})
+        this.setState({ loading: false })
       }
     })
   }
@@ -35,29 +35,24 @@ export default class App extends Component {
     return (
       <View style={styles.container}>
         <NavigationContainer>
-        <Stack.Navigator>
-            {
-              this.state.loggedIn ? 
-              <>
-              <Stack.Screen
-                options={{ headerShown: false }}
-                name="HomeMenu"
-                component={HomeMenu}
-              />
-              </> : 
-              <>
-                <Stack.Screen
-                  options={{ headerShown: false }}
-                  name="Register"
-                  component={Register}
-                />
-                <Stack.Screen
-                  options={{ headerShown: false }}
-                  name="Login"
-                  component={Login}
-                />
-              </>
-            }
+          <Stack.Navigator>
+
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="Login"
+              component={Login}
+            />
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="Register"
+              component={Register}
+            />
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="HomeMenu"
+              component={HomeMenu}
+            />
+
           </Stack.Navigator>
         </NavigationContainer>
       </View>
