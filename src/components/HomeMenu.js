@@ -6,6 +6,7 @@ import { auth } from '../firebase/config';
 
 import AntDesign from '@expo/vector-icons/AntDesign';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 import Home from "../screens/Home";
 import NewPost from '../screens/NewPost';
@@ -103,7 +104,7 @@ class HomeMenu extends Component {
                         headerShown: false,
                         tabBarShowLabel: false,
                         tabBarIcon: () => (
-                            <MaterialCommunityIcons name="post" size={24} color="black" />
+                            <AntDesign name="pluscircleo" size={24} color="black" />
                         ),
                     }}
                     name="NewPost"
@@ -115,7 +116,7 @@ class HomeMenu extends Component {
                         headerShown: false,
                         tabBarShowLabel: false,
                         tabBarIcon: () => (
-                            <MaterialCommunityIcons name="face-man-profile" size={24} color="black" />
+                            <Ionicons name="person-sharp" size={24} color="black" />
                         ),
                     }}
                     name="Profile"

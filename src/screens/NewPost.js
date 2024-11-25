@@ -21,7 +21,7 @@ class NewPost extends Component {
     db.collection("posts").add(this.state)
       .then(res => {
         // console.log("El posteo se subió")
-        this.setState({titulo: "", descripcion: "", msgExito:"publicación subida con exito"})
+        this.setState({titulo: "", descripcion: "", msgExito:"Publicación subida con éxito"})
       })
       .catch((error) => {
         console.log(error.message);
@@ -33,15 +33,17 @@ class NewPost extends Component {
       <View style={styles.container}>
         <Text style={styles.heading}>Formulario nuevo posteo</Text>
 
-        <Text>Título</Text>
+        <Text style={styles.subheading}>Título</Text>
         <TextInput
           style={styles.input}
           keyboardType="default"
           onChangeText={(titulo) => this.setState({ titulo })}
-          placeholder="Ingrese el títlo"
+          placeholder="Ingrese el título"
           value={this.state.titulo}
         />
-        <Text>Descripción</Text>
+        
+        
+        <Text style={styles.subheading}>Descripción</Text>
         <TextInput
           style={styles.input}
           keyboardType="default"
@@ -50,7 +52,7 @@ class NewPost extends Component {
           value={this.state.descripcion}
         />
         <TouchableOpacity onPress={() => this.handleSubmit()} style={styles.button}>
-          Subir posteo
+         <Text style={styles.buttonText}> Subir posteo</Text>
         </TouchableOpacity>
         <Text> {this.state.msgExito}</Text>
       </View>
@@ -65,19 +67,37 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  heading:{
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#333",
+    marginBottom: 20
+  },
   input: {
     padding: 10,
     borderWidth: 1,
-    borderColor: "#00000087"
+    borderColor: "#00000087",
+    marginTop: 20,
+    marginBottom: 20,
   },
   button: {
-    backgroundColor: "orange",
+    backgroundColor: "#0095F6",
     borderRadius: 5,
     padding: 10,
     width: "50%",
     alignItems: "center",
-    marginTop: 10,
+    marginTop: 20,
   },
+  subheading:{
+    fontSize: 15,
+    fontWeight: "bold",
+    color: "#333",
+  },
+  buttonText: {
+    color: "#FFFFFF",
+    fontSize: 16,
+    fontWeight: "bold",
+  }
 
 });
 
