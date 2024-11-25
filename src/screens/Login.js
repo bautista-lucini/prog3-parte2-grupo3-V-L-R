@@ -14,20 +14,20 @@ class Login extends Component {
     };
   }
 
-  handleSubmit(email, password){
+  handleSubmit(email, password) {
     auth.signInWithEmailAndPassword(email, password)
-    .then((response) => {
-      console.log(response);
-      this.props.navigation.navigate("HomeMenu");
-    })
-    .catch((error) => {
-      console.log(error.message);
-    });
+      .then((response) => {
+        console.log(response);
+        this.props.navigation.navigate("HomeMenu");
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   }
 
   componentDidMount() {
     auth.onAuthStateChanged((user) => {
-      if(user){
+      if (user) {
         this.props.navigation.navigate("HomeMenu")
       }
     })
@@ -60,11 +60,11 @@ class Login extends Component {
         <TouchableOpacity
           onPress={() => this.handleSubmit(this.state.email, this.state.password)}
           style={[styles.button, styles.buttonSecondary]}>
-            
-            <Text style={styles.navText}>Entrar en la app.</Text>
+
+          <Text style={styles.navText}>Entrar en la app.</Text>
 
         </TouchableOpacity>
-        
+
         <Text>Navegación cruzada a Register: </Text>
         <TouchableOpacity
           onPress={() => this.props.navigation.navigate("Register")}
@@ -72,7 +72,7 @@ class Login extends Component {
         >
           <Text style={styles.navText}>No tengo cuenta</Text>
         </TouchableOpacity>
-  
+
       </View>
     );
   }
@@ -96,31 +96,31 @@ const styles = StyleSheet.create({
     padding: 16,
     alignItems: "center",
     justifyContent: "center",
-    width: 250, 
+    width: 250,
     marginTop: 10,
   },
   buttonSecondary: {
     backgroundColor: "#0095F6",
-      borderRadius: 8,
-      padding: 16,
-      alignItems: "center",
-      justifyContent: "center",
-      width: 250, 
-      marginTop: 10,
+    borderRadius: 8,
+    padding: 16,
+    alignItems: "center",
+    justifyContent: "center",
+    width: 250,
+    marginTop: 10,
   },
-  input:{
-    width: 300, 
-      backgroundColor: "#FFFFFF", 
-      borderRadius: 8, 
-      padding: 12, 
-      borderWidth: 1,
-      borderColor: "#DBDBDB", 
-      marginBottom: 15,
-      fontSize: 16,
-      color: "#262626", 
+  input: {
+    width: 300,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 8,
+    padding: 12,
+    borderWidth: 1,
+    borderColor: "#DBDBDB",
+    marginBottom: 15,
+    fontSize: 16,
+    color: "#262626",
   },
   navText: {
-    color: "#FFFFFF", 
+    color: "#FFFFFF",
     fontSize: 16,
     fontWeight: "bold",
   }

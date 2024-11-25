@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, Image } from 'react-native'; 
+import { StyleSheet, View, Text, Image } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { auth } from '../firebase/config';
@@ -27,14 +27,14 @@ class HomeMenu extends Component {
             if (!usr) {
                 this.props.navigation.navigate("Login")
             }
-          })
+        })
     }
 
     mostrarHeader = (title) => (
         <View style={styles.header}>
-            <Image 
-                source={require("../../assets/logo2.png")} 
-                style={styles.logo} 
+            <Image
+                source={require("../../assets/logo2.png")}
+                style={styles.logo}
             />
             <Text style={styles.headerText}>{title}</Text>
         </View>
@@ -74,7 +74,7 @@ class HomeMenu extends Component {
     render() {
         return (
             <Tab.Navigator>
-                <Tab.Screen 
+                <Tab.Screen
                     options={{
                         headerShown: false,
                         tabBarShowLabel: false,
@@ -83,10 +83,10 @@ class HomeMenu extends Component {
                         ),
                     }}
                     name="Home"
-                    component={this.HomeMensaje} 
+                    component={this.HomeMensaje}
                 />
 
-                <Tab.Screen 
+                <Tab.Screen
                     options={{
                         headerShown: false,
                         tabBarShowLabel: false,
@@ -95,10 +95,10 @@ class HomeMenu extends Component {
                         ),
                     }}
                     name="Users"
-                    component={this.SearchMensaje} 
+                    component={this.SearchMensaje}
                 />
-                
-                <Tab.Screen 
+
+                <Tab.Screen
                     options={{
                         headerShown: false,
                         tabBarShowLabel: false,
@@ -107,10 +107,10 @@ class HomeMenu extends Component {
                         ),
                     }}
                     name="NewPost"
-                    component={this.NewPostMensaje} 
+                    component={this.NewPostMensaje}
                 />
-                
-                <Tab.Screen 
+
+                <Tab.Screen
                     options={{
                         headerShown: false,
                         tabBarShowLabel: false,
@@ -119,9 +119,9 @@ class HomeMenu extends Component {
                         ),
                     }}
                     name="Profile"
-                    component={this.ProfileMensaje} 
-                />            
-    
+                    component={this.ProfileMensaje}
+                />
+
             </Tab.Navigator>
         );
     }
@@ -134,23 +134,23 @@ const styles = StyleSheet.create({
     header: {
         height: 90,
         backgroundColor: "white",
-        flexDirection: "row", 
-        alignItems: "center", 
-        justifyContent: "flex-start", 
-        paddingHorizontal: 15, 
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "flex-start",
+        paddingHorizontal: 15,
         borderBottomWidth: 1,
         borderBottomColor: "#ddd",
     },
     logo: {
-        width: 110, 
-        height: 85, 
-        resizeMode: "contain", 
+        width: 110,
+        height: 85,
+        resizeMode: "contain",
     },
     headerText: {
-        fontSize: 15, 
-        fontWeight: "500", 
-        color: "#4A4A4A", 
-        marginLeft: 20, 
+        fontSize: 15,
+        fontWeight: "500",
+        color: "#4A4A4A",
+        marginLeft: 20,
     },
 });
 

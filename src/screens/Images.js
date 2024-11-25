@@ -2,4 +2,4 @@
   name="Images"
   component={Images}
 />
-  //tengo que seguir
+//tengo que seguir

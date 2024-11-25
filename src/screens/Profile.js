@@ -8,7 +8,7 @@ import {
     FlatList,
     Image,
 } from 'react-native';
-import { auth, db } from  "../firebase/config";
+import { auth, db } from "../firebase/config";
 
 class Profile extends Component {
     constructor(props) {
@@ -21,7 +21,7 @@ class Profile extends Component {
         }
     }
 
-    borrarPost(id) { 
+    borrarPost(id) {
         db.collection("posts").doc(id).delete()
             .then(() => {
                 this.setState({
@@ -33,12 +33,12 @@ class Profile extends Component {
             });
     }
 
-    logout() { 
+    logout() {
         auth.signOut();
         this.props.navigation.navigate("Login");
     }
 
-    componentDidMount(){
+    componentDidMount() {
         db.collection("posts").where("owner", "==", this.state.email).get()
             .then((querySnapshot) => {
                 let posts = [];
@@ -83,7 +83,7 @@ class Profile extends Component {
                                         <View style={styles.postContainer}>
                                             <Text style={styles.postTitle}> {item.titulo} </Text>
                                             <Text style={styles.postDescription}> {item.descripcion}</Text>
-                                            <TouchableOpacity 
+                                            <TouchableOpacity
                                                 onPress={() => this.borrarPost(item.id)}
                                                 style={styles.Button}
                                             >
@@ -95,18 +95,18 @@ class Profile extends Component {
                                 keyExtractor={(item) => item.id}
                             />
                 }
-                    <View style={styles.profileContainer}>
-                    <Image 
-                        source={require("../../assets/profile-generico.png")} 
-                        style={styles.profileImage} 
+                <View style={styles.profileContainer}>
+                    <Image
+                        source={require("../../assets/profile-generico.png")}
+                        style={styles.profileImage}
                     />
                     <View>
                         <Text style={styles.username}> {this.state.username}</Text>
                         <Text style={styles.email}> {this.state.email}</Text>
                     </View>
                 </View>
-    
-                <TouchableOpacity 
+
+                <TouchableOpacity
                     onPress={() => this.logout()}
                     style={styles.ButtonLogout}
                 >
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     profileContainer: {
         flexDirection: "row",
         alignItems: "center",
-        marginVertical: 20, 
+        marginVertical: 20,
     },
     profileImage: {
         width: 50,

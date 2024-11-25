@@ -3,59 +3,59 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-nativ
 import { auth, db } from "../firebase/config";
 
 class NewPost extends Component {
- constructor(props) {
-        super(props)
-        this.state = {
-          titulo: "",
-          descripcion: "",
-          owner: auth.currentUser.email,
-          createdAt: Date.now(),
-          likes: [],
-          errMsg: "",
-      }   
-    }
-    
-    handleSubmit() {
-        console.log(this.state)
-        db.collection("posts").add(this.state)
-        .then(res => {
-          // console.log("El posteo se subió")
-          this.props.navigation.navigate("Home")
-         })
-         .catch((error) => {
-          console.log(error.message);
-          this.setState({ errMsg: error.message });
-        });
-      }
-    render() {
-        return(
-        <View style={styles.container}>
-          <Text style={styles.heading}>Formulario nuevo posteo</Text>
-
-                <Text>Título</Text>
-                <TextInput
-                    style={styles.input}
-                    keyboardType="default"
-                    onChangeText={(titulo) => this.setState({titulo})}
-                    placeholder="Ingrese el títlo"
-                    value={this.state.titulo}
-                />
-                <Text>Descripción</Text>
-                <TextInput
-                    style={styles.input}
-                    keyboardType="default"
-                    onChangeText={(descripcion) => this.setState({descripcion})}
-                    placeholder="Ingrese la descripción"
-                    value={this.state.descripcion}
-                />
-                <TouchableOpacity onPress={() => this.handleSubmit()} style={styles.button}>
-                    Subir posteo
-                </TouchableOpacity>
-            </View>
-        )
+  constructor(props) {
+    super(props)
+    this.state = {
+      titulo: "",
+      descripcion: "",
+      owner: auth.currentUser.email,
+      createdAt: Date.now(),
+      likes: [],
+      errMsg: "",
     }
   }
-  
+
+  handleSubmit() {
+    console.log(this.state)
+    db.collection("posts").add(this.state)
+      .then(res => {
+        // console.log("El posteo se subió")
+        this.props.navigation.navigate("Home")
+      })
+      .catch((error) => {
+        console.log(error.message);
+        this.setState({ errMsg: error.message });
+      });
+  }
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.heading}>Formulario nuevo posteo</Text>
+
+        <Text>Título</Text>
+        <TextInput
+          style={styles.input}
+          keyboardType="default"
+          onChangeText={(titulo) => this.setState({ titulo })}
+          placeholder="Ingrese el títlo"
+          value={this.state.titulo}
+        />
+        <Text>Descripción</Text>
+        <TextInput
+          style={styles.input}
+          keyboardType="default"
+          onChangeText={(descripcion) => this.setState({ descripcion })}
+          placeholder="Ingrese la descripción"
+          value={this.state.descripcion}
+        />
+        <TouchableOpacity onPress={() => this.handleSubmit()} style={styles.button}>
+          Subir posteo
+        </TouchableOpacity>
+      </View>
+    )
+  }
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -63,8 +63,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  input:{
-    padding: 10, 
+  input: {
+    padding: 10,
     borderWidth: 1,
     borderColor: "#00000087"
   },
