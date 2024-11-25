@@ -8,6 +8,7 @@ class NewPost extends Component {
     this.state = {
       titulo: "",
       descripcion: "",
+      msgExito: "",
       owner: auth.currentUser.email,
       createdAt: Date.now(),
       likes: [],
@@ -20,7 +21,7 @@ class NewPost extends Component {
     db.collection("posts").add(this.state)
       .then(res => {
         // console.log("El posteo se subió")
-        this.props.navigation.navigate("Home")
+        this.setState({titulo: "", descripcion: "", msgExito:"publicación subida con exito"})
       })
       .catch((error) => {
         console.log(error.message);
@@ -51,6 +52,7 @@ class NewPost extends Component {
         <TouchableOpacity onPress={() => this.handleSubmit()} style={styles.button}>
           Subir posteo
         </TouchableOpacity>
+        <Text> {this.state.msgExito}</Text>
       </View>
     )
   }

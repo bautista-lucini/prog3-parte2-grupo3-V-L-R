@@ -20,10 +20,32 @@ class Register extends Component {
       password: "",
       registered: false,
       errMsg: "",
+      errorEmail: "",
+      errorUsername: "",
+      errorPassword: "",
     };
   }
 
   handleSubmit(username, email, pass) {
+    
+    if (email === "") {
+      this.setState({ errorEmail: "el email es requerido"})
+    } else {
+      this.setState({ errorEmail: ""})
+    }
+
+    if (username=== "") {
+      this.setState({ errorUsername: "el usuario requerido"})
+    } else{
+      this.setState ({ errorUsername: ""})
+    }
+    
+    if (pass === "") {
+      this.setState({ errorPassword: "la contraseña es requerida"})
+    } else {
+      this.setState({ errorPassword: ""})
+    }
+
     auth.createUserWithEmailAndPassword(email, pass)
       .then((response) => {
         if (response) {
@@ -58,6 +80,7 @@ class Register extends Component {
           placeholder="Ingrese su nombre de usario"
           value={this.state.username}
         />
+        <Text> {this.state.errorUsername}</Text>
 
         <TextInput
           style={styles.input}
@@ -66,6 +89,7 @@ class Register extends Component {
           placeholder="Ingrese su email"
           value={this.state.email}
         />
+        <Text> {this.state.errorEmail}</Text>
 
         <TextInput
           style={styles.input}
@@ -75,6 +99,7 @@ class Register extends Component {
           secureTextEntry={true}
           value={this.state.password}
         />
+         <Text> {this.state.errorPassword}</Text>
 
         <TouchableOpacity
           onPress={() =>
