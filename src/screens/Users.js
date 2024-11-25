@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, FlatList } from "react-native";
 import { auth, db } from "../firebase/config";
 
 class Users extends Component {
@@ -12,7 +12,7 @@ class Users extends Component {
       }   
     }
     
-    handleSearch() {
+    handleSubmit() {
       // hacer con users. lo anterior no va mas. 
       db.collection("users").onSnapshot(doc => {
         let users = [];
@@ -37,11 +37,21 @@ class Users extends Component {
                     keyboardType="default"
                     onChangeText={ (text) => {
                       this.setState({username: text})
-                      this.handleSearch()
+                      this.handleSubmit()
                     }}
                     placeholder="Ingrese el nombre de usuario"
-                    // value={this.state.titulo}
+                    value={this.state.username}
                 />
+                 {
+                  this.state.username === "" ?
+                  null :
+                    this.state.users.length === 0 ?
+                    <Text>No hay resultados para su búsqueda</Text> :
+                    <FlatList
+                      data={this.state.users}
+                      renderItem={({item}) => <Text>{item.username}</Text>}
+                    />
+                 }
                
                 <TouchableOpacity onPress={() => this.handleSubmit()} style={styles.button}>
                     Buscar
